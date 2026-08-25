@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StreamForge — Privacy Policy</title>
+<style>:root{color-scheme:light dark}
+body{max-width:44rem;margin:0 auto;padding:2.5rem 1.25rem 4rem;
+font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+color:#1a1a1a;background:#fff}
+@media(prefers-color-scheme:dark){body{color:#e6e6e6;background:#131315}
+a{color:#8ab4f8}}
+h1{font-size:1.9rem;line-height:1.2;margin:0 0 .4rem}
+h2{font-size:1.15rem;margin:2.2rem 0 .6rem}
+.updated{color:#6b6b6b;font-size:.9rem;margin:0 0 2rem}
+ul{padding-left:1.2rem}li{margin:.35rem 0}
+a{color:#0b57d0}
+nav{margin-bottom:2rem;font-size:.9rem}
+nav a{margin-right:1rem}</style>
+</head>
+<body>
+<nav><a href="/">Home</a><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a></nav>
+<h1>StreamForge — Privacy Policy</h1>
+<p class="updated"><strong>Last updated: 25 August 2026</strong></p>
+<p>StreamForge is desktop software that runs on your own computer. This policy explains what it holds, where it holds it, and what leaves your machine.</p>
+<h2>The short version</h2>
+<p>Your video, your clips and your credentials stay on your PC. The only data that leaves your computer is what you explicitly publish to a platform you connected, plus the API calls needed to publish it and read back its performance.</p>
+<h2>1. What StreamForge stores on your computer</h2>
+<ul>
+<li><strong>Recordings and clips</strong> — the video and audio you capture, in your chosen media folder.</li>
+<li><strong>A local database</strong> — session records, detected highlight moments and their scores, your posting queue, and the performance metrics fetched for posts you made.</li>
+<li><strong>Chat messages</strong> collected during a live session, used to detect moments when chat reacted. Chat authors are stored as a one-way hash, not as usernames.</li>
+<li><strong>Configuration</strong> — your preferences, destination names and URLs, branding and schedule.</li>
+</ul>
+<p>All of this lives on your disk. None of it is uploaded to us. We do not operate a server that receives your recordings.</p>
+<h2>2. Credentials</h2>
+<p>Stream keys and platform access tokens are stored in your operating system&#x27;s credential store (Windows Credential Manager). They are never written to configuration files, never written to logs, and never committed to source control. Log output containing a key or URL is redacted before it is written.</p>
+<h2>3. What is sent to third parties</h2>
+<p>Only when you connect an account and approve an action:</p>
+<ul>
+<li><strong>The video you approved</strong>, uploaded to the platform you picked.</li>
+<li><strong>Its title, description and tags</strong>, as you set them.</li>
+<li><strong>Your basic profile information</strong>, read from the platform so the app can show which account it is posting as, and — where a platform provides it — your follower count, used to tell you whether you meet that platform&#x27;s requirements for going live.</li>
+<li><strong>Performance metrics</strong> for posts you made (views, likes, comments), read back so the app can show how a clip did and improve how it scores future clips.</li>
+</ul>
+<p>Each platform&#x27;s own privacy policy governs what it does with the content once it is uploaded.</p>
+<h2>4. What is never sent</h2>
+<p>We do not sell data, run advertising, or share your data with third parties for their own purposes. StreamForge contains no analytics or telemetry that reports your usage back to us.</p>
+<h2>5. Other people in your content</h2>
+<p>If your stream captures other people — a co-streamer&#x27;s voice, a webcam guest, chat participants — you are responsible for having their permission to record and publish that. StreamForge stores chat author identifiers as hashes to limit what a recording reveals about the people in your chat.</p>
+<h2>6. Retention and deletion</h2>
+<p>Because everything is local, you control retention:</p>
+<ul>
+<li>Deleting a recording, clip or project in the app removes it from your disk.</li>
+<li>Disconnecting a platform account deletes that platform&#x27;s stored credentials from your credential store.</li>
+<li>Uninstalling the app and deleting its data folder removes everything it held.</li>
+</ul>
+<p>Content you already published to a platform is governed by that platform — delete it there.</p>
+<h2>7. Children</h2>
+<p>StreamForge is not intended for use by children, and it should not be used to publish content of children without the consent of a parent or guardian.</p>
+<h2>8. Changes</h2>
+<p>This policy may change as the app changes. The &quot;last updated&quot; date shows when.</p>
+<h2>9. Contact</h2>
+<p>Questions about privacy: open an issue on the project&#x27;s repository.</p>
+</body>
+</html>
