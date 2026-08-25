@@ -22,9 +22,20 @@ word-break:break-all}
 </head>
 <body>
 
-<h1>Connecting your TikTok account…</h1>
-<p class="dim">Handing this back to StreamForge on your computer.
-You can close this tab once it says connected.</p>
+<div id="working">
+  <h1>Connecting your TikTok account…</h1>
+  <p class="dim">Handing this back to StreamForge on your computer.
+  You can close this tab once it says connected.</p>
+</div>
+
+<div id="idle" style="display:none">
+  <h1>StreamForge</h1>
+  <p class="dim">This page is where TikTok sends you back to after you
+  approve access. There is nothing to do here.</p>
+  <p class="dim">Start the connection from inside StreamForge —
+  <strong>Accounts → Connect</strong> — and this page will do its part
+  automatically.</p>
+</div>
 
 <div id="manual">
   <p><strong>StreamForge did not pick this up automatically.</strong></p>
@@ -53,6 +64,18 @@ You can close this tab once it says connected.</p>
   allow.forEach(function (k) {
     if (incoming.has(k)) out.set(k, incoming.get(k));
   });
+
+  // Only forward a real callback. Opening this page by hand — to check it is
+  // live, or from a bookmark — must NOT poke the local port: a paramless
+  // request arrives with no `state`, and the app correctly treats an
+  // unmatched state as a possible CSRF and aborts. That would kill a consent
+  // flow the user is in the middle of, and report it as a security error.
+  // Cost one confusing failure in Phase 12 before the page was fixed.
+  if (!incoming.has("code") && !incoming.has("error")) {
+    document.getElementById("idle").style.display = "block";
+    document.getElementById("working").style.display = "none";
+    return;
+  }
 
   var target = "http://127.0.0.1:" + PORT + PATH +
                (out.toString() ? "?" + out.toString() : "");
