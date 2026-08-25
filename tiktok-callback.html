@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>StreamForge — connecting TikTok</title>
+<style>
+:root{color-scheme:light dark}
+body{max-width:34rem;margin:0 auto;padding:4rem 1.25rem;
+font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+color:#1a1a1a;background:#fff;text-align:center}
+@media(prefers-color-scheme:dark){body{color:#e6e6e6;background:#131315}
+a{color:#8ab4f8}}
+h1{font-size:1.4rem;margin:0 0 .75rem}
+p{margin:.5rem 0}
+.dim{color:#6b6b6b;font-size:.9rem}
+code{background:rgba(128,128,128,.15);padding:.15rem .35rem;border-radius:3px;
+word-break:break-all}
+#manual{display:none;margin-top:2rem}
+</style>
+</head>
+<body>
+
+<h1>Connecting your TikTok account…</h1>
+<p class="dim">Handing this back to StreamForge on your computer.
+You can close this tab once it says connected.</p>
+
+<div id="manual">
+  <p><strong>StreamForge did not pick this up automatically.</strong></p>
+  <p class="dim">Make sure StreamForge is running and waiting for consent,
+  then open this link:</p>
+  <p><a id="link" href="#"><code id="target"></code></a></p>
+</div>
+
+<script>
+// TikTok's console refuses a loopback redirect URI, so the app registers this
+// HTTPS page instead and we hand the query string on to the listener waiting
+// on 127.0.0.1. Nothing is stored, nothing is sent anywhere else, and the
+// page holds no secret: the authorization code is useless without the PKCE
+// code_verifier, which never leaves the user's machine.
+(function () {
+  var PORT = 7117;                 // [ports] oauth in config.toml
+  var PATH = "/callback/";         // TIKTOK.redirect_path
+  var qs = window.location.search || "";
+
+  // Only forward what an OAuth callback legitimately carries. Anything else
+  // is dropped rather than replayed at a local port.
+  var allow = ["code", "state", "scopes", "scope", "error",
+               "error_description", "error_code"];
+  var incoming = new URLSearchParams(qs);
+  var out = new URLSearchParams();
+  allow.forEach(function (k) {
+    if (incoming.has(k)) out.set(k, incoming.get(k));
+  });
+
+  var target = "http://127.0.0.1:" + PORT + PATH +
+               (out.toString() ? "?" + out.toString() : "");
+
+  document.getElementById("target").textContent = target;
+  document.getElementById("link").href = target;
+
+  // If the app is not listening the navigation quietly fails, so offer the
+  // manual link after a moment rather than leaving a dead page.
+  setTimeout(function () {
+    document.getElementById("manual").style.display = "block";
+  }, 2500);
+
+  window.location.replace(target);
+})();
+</script>
+
+</body>
+</html>
